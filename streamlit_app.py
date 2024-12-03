@@ -70,7 +70,7 @@ if file_upload is not None:
             except Exception as e:
                 st.error(f'No se pudo procesar el archivo {file.name}: {str(e)}')
             csv_str = df_excel.to_csv(**CSV_PARAMS)
-            df_csv = pd.read_csv(io.StringIO(csv))
+            df_csv = pd.read_csv(io.StringIO(csv_str))
             # Split the file name from the file extension to make the download button distinctive
             file_name_no_ext = os.path.splitext(file.name)[0]
 
@@ -83,7 +83,7 @@ if file_upload is not None:
                          e intenta nuevamente.
                          ''')
             else:
-                file_list.append((csv, file_name_no_ext + '.csv'))
+                file_list.append((csv_str, file_name_no_ext + '.csv'))
                 # If there's only one file, show the regular download button
                 st.download_button(
                     label=f'Download \'{file_name_no_ext}\' as CSV',
