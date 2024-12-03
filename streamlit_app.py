@@ -69,7 +69,7 @@ if file_upload is not None:
                 st.write(df_excel.head(5))  # Muestra el dataframe procesado
             except Exception as e:
                 st.error(f'No se pudo procesar el archivo {file.name}: {str(e)}')
-            csv_str = df_excel.to_csv(index=False, **CSV_PARAMS)
+            csv_str = df_excel.to_csv(**CSV_PARAMS)
             df_csv = pd.read_csv(io.StringIO(csv))
             # Split the file name from the file extension to make the download button distinctive
             file_name_no_ext = os.path.splitext(file.name)[0]
