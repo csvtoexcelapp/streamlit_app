@@ -22,9 +22,9 @@ st.sidebar.markdown(
     '<p class="font">Conversor de Excel a CSV</p>', unsafe_allow_html=True)
 
 logo_image = Image.open('imgs/excel_img.jpg')
-st.sidebar.image(logo_image, use_column_width=True)
+st.sidebar.image(logo_image, use_container_width=True)
 
-with st.sidebar.expander('**How it Works**', expanded=True):
+with st.sidebar.expander('**¿Cómo funciona?**', expanded=True):
     st.write('''
             Este convertidor toma archivos de Excel y los convierte directamente a archivos CSV sin modificar las columnas ni las filas de ninguna manera. 
             Asegúrese de que los archivos de entrada sean archivos de Excel de una sola hoja, no de varias hojas, y que en la primera fila del excel se encuentre
@@ -48,7 +48,13 @@ if file_upload is not None:
             st.error(
                 f'This file type is invalid: {file.name} must be an .xlsx or .xls file to proceed.')
         else:
-            df_excel = pd.read_excel(file.name)
+            # Procesar el archivo cargado directamente desde el objeto file
+            try:
+                df_excel = pd.read_excel(file)
+                st.success(f'Archivo procesado exitosamente: {file.name}')
+                st.write(df_excel.head(5))  # Muestra el dataframe procesado
+            except Exception as e:
+                st.error(f'No se pudo procesar el archivo {file.name}: {str(e)}')
             csv = df_excel.to_csv(index=False)
             df_csv = pd.read_csv(io.StringIO(csv))
             # Split the file name from the file extension to make the download button distinctive
