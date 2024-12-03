@@ -1,11 +1,6 @@
-# Excel to CSV Converter
+# Conversor de Excel a CSV
 ![screenshot](https://i.imgur.com/1DDEQvu.png)
 
-This converter takes Excel files and converts them directly to CSV files without changing the columns or rows in any way. There is a limit to the size and quantity of files that can be processed so use cases will vary but simple operations and files will benefit from the elimination of manual conversion.
+Este conversortoma archivos de Excel y los convierte directamente a archivos CSV sin modificar las columnas ni las filas de ninguna manera. Existe un límite en el tamaño y la cantidad de archivos que se pueden procesar, por lo que los casos de uso pueden variar, pero las operaciones simples y los archivos se beneficiarán de la eliminación de la conversión manual.
 
-Users can download the converted files as individual CSV files or as a zip file containing all files when multiple files are uploaded.
-
-## Technologies Used
-- [Streamlit](https://pypi.org/project/streamlit/)
-- [Pandas](https://pypi.org/project/pandas/)
-- [Pillow](https://pypi.org/project/Pillow/)
+Los usuarios pueden descargar los archivos convertidos como archivos CSV individuales o como un archivo zip que contiene todos los archivos cuando se suben varios archivos.
