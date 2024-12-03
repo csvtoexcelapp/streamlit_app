@@ -5,10 +5,24 @@ import zipfile
 import uuid
 import io
 import os
+import csv as csv
 
 from PIL import Image
 
+CSV_PARAMS = {
+    'encoding': 'utf-8',
+    'sep': ',',
+    'quoting': csv.QUOTE_ALL,
+    'quotechar': '"',
+    'lineterminator': '\n',
+    'decimal': '.',
+    'index': False,
+    'float_format': '%.5f'
+}
+
 #----------------------------------------------------------#
+
+
 
 st.markdown('''
             <style> .font {
@@ -55,7 +69,7 @@ if file_upload is not None:
                 st.write(df_excel.head(5))  # Muestra el dataframe procesado
             except Exception as e:
                 st.error(f'No se pudo procesar el archivo {file.name}: {str(e)}')
-            csv = df_excel.to_csv(index=False)
+            csv_str = df_excel.to_csv(index=False, **CSV_PARAMS)
             df_csv = pd.read_csv(io.StringIO(csv))
             # Split the file name from the file extension to make the download button distinctive
             file_name_no_ext = os.path.splitext(file.name)[0]
@@ -73,7 +87,7 @@ if file_upload is not None:
                 # If there's only one file, show the regular download button
                 st.download_button(
                     label=f'Download \'{file_name_no_ext}\' as CSV',
-                    data=csv,
+                    data=csv_str,
                     file_name=file_name_no_ext + '.csv',
                     mime='text/csv',
                     key=str(uuid.uuid4())) # Generate random key to avoid 'DuplicateWidgetID' error
